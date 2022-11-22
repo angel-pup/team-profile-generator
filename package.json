@@ -1,0 +1,19 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "KU Coding Bootcamp challenge 10 - OOP design - generates an HTML pages with different types of employees listed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SpencerRSMS/team-profile-generator.git"
+  },
+  "author": "Vess Stewart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SpencerRSMS/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/SpencerRSMS/team-profile-generator#readme"
+}
