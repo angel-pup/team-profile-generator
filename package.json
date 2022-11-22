@@ -19,5 +19,8 @@
   "homepage": "https://github.com/SpencerRSMS/team-profile-generator#readme",
   "devDependencies": {
     "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.4"
   }
 }
