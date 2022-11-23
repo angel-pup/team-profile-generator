@@ -21,6 +21,8 @@
     "jest": "^24.9.0"
   },
   "dependencies": {
-    "inquirer": "^8.2.4"
+    "inquirer": "^8.2.4",
+    "jquery": "^3.6.1",
+    "materialize": "^1.0.0"
   }
 }

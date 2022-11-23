@@ -89,6 +89,7 @@ async function init() {
 
     // if employee type is not equal to our stop value, continue asking questions
     while(employee_type !== 'No Thanks.') {
+
         // call add_employee() to check if user would like to add another team member
         let add_moar_employees = await add_employee();
         // store the returned value
@@ -105,8 +106,8 @@ async function init() {
             );
             // store Engineer data object in our employee object array
             employees.push(engineer);
-
         }
+
         // else if employee_type is Intern, ask Intern questions and store object data
         else if (employee_type === 'Intern') {
             const intern_info = await intern_questions();
@@ -118,8 +119,8 @@ async function init() {
             );
             // store Intern data object in our employee object array
             employees.push(intern);
-
         }
+
     }
 
     console.log(employees); // TODO: create new instance of Template, then pass data/generate HTML
