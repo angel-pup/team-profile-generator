@@ -80,20 +80,21 @@ async function init() {
     let employee_type = '';
 
     while(employee_type !== 'No Thanks.') {
-        employee_type = await add_employee().type;
+        let add_moar_employees = await add_employee();
+        employee_type = add_moar_employees.type;
 
         if (employee_type === 'Engineer') {
-            const engineer_data = await engineer_questions();
-            const engineer = new Engineer(engineer_data.name, engineer_data.id, engineer_data.email, engineer_data.github);
+            const engineer_info = await engineer_questions();
+            const engineer = new Engineer(engineer_info.name, engineer_info.id, engineer_info.email, engineer_info.github);
             employees.push(engineer);
         } else if (employee_type === 'Intern') {
-            const intern_data = await intern_questions();
-            const intern = new Intern(intern_data.name, intern_data.id, intern_data.email, intern_data.school);
+            const intern_info = await intern_questions();
+            const intern = new Intern(intern_info.name, intern_info.id, intern_info.email, intern_info.school);
             employees.push(intern);
         }
     }
 
-    console.log(employees);
+    console.log(employees); // TODO: create new instance of Template, then pass data/generate HTML
 }
 
 async function add_employee() {
