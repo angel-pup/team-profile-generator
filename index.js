@@ -88,7 +88,7 @@ async function init() {
             employees.push(engineer);
         } else if (employee_type === 'Intern') {
             const intern_data = await intern_questions();
-            const intern = new Engineer(intern_data.name, intern_data.id, intern_data.email, intern_data.school);
+            const intern = new Intern(intern_data.name, intern_data.id, intern_data.email, intern_data.school);
             employees.push(intern);
         }
     }
