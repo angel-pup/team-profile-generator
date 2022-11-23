@@ -24,32 +24,32 @@ const questions = {
     'name-question': {
         type: 'input',
         name: 'name',
-        message: 'Please input Employee\'s name.'
+        message: 'Please input employee\'s name.'
     },
     'id-question': {
         type: 'input',
         name: 'id',
-        message: 'Please input Employee\'s ID.'
+        message: 'Please input employee\'s ID.'
     },
     'email-question': {
         type: 'input',
         name: 'email',
-        message: 'Please input Employee\'s email address.'
+        message: 'Please input employee\'s email address.'
     },
     'office-number-question': {
         type: 'input',
-        name: 'officeNumber',
-        message: 'Please input Employee\'s Office Number.'
+        name: 'office_number',
+        message: 'Adding Manager to the team.\nPlease input Manager\'s Office Number.'
     },
     'github-question': {
         type: 'input',
         name: 'github',
-        message: 'Please input Employee\'s GitHub Username.'
+        message: 'Adding Engineer to the team.\nPlease input employee\'s GitHub Username.'
     },
     'school-question': {
         type: 'input',
-        name: 'github',
-        message: 'Please input Employee\'s current School.'
+        name: 'school',
+        message: 'Adding Intern to the team.\nPlease input Employee\'s current School.'
     },
     'add-employee-question': {
         type: 'list',
@@ -63,43 +63,72 @@ const questions = {
 function writeToFile(fileName, data) {}
 
 // Function to initialize app
-function init() {}
+async function init() {
 
-// Function to ask question
-function question(question_type) {
-    inquirer
-        .prompt([questions[question_type]])
-        .then((data) => {
-            console.log(data); // TODO: Manipulate data
-            switch(question_type) {
-                case OFFICE_NUMBER_QUESTION:
-                    question(NAME_QUESTION);
-                    break;
-                case NAME_QUESTION:
-                    question(ID_QUESTION);
-                    break;
-                case ID_QUESTION:
-                    question(EMAIL_QUESTION);
-                    break
-                case EMAIL_QUESTION:
-                    question(ADD_EMPLOYEE_QUESTION);
-                    break;
-                case ADD_EMPLOYEE_QUESTION:
-                    if(data.type === 'Engineer') {
-                        question(GITHUB_QUESTION);
-                    } else if(data.type === 'Intern') {
-                        question(SCHOOL_QUESTION);
-                    } else {
-                        console.log('No further questions...')
-                        console.log('Generating HTML file.');
-                    }
-                    break;
-                default:
-                    question(NAME_QUESTION);
-            }
-        })
+    let employees = [];
+    let manager_info = await manager_questions();
+
+    const manager = new Manager(
+        manager_info.name,
+        manager_info.id,
+        manager_info.email,
+        manager_info.office_number
+    );
+
+    employees.push(manager);
+
+    let employee_type = '';
+
+    while(employee_type !== 'No Thanks.') {
+        employee_type = await add_employee().type;
+
+        if (employee_type === 'Engineer') {
+            const engineer_data = await engineer_questions();
+            const engineer = new Engineer(engineer_data.name, engineer_data.id, engineer_data.email, engineer_data.github);
+            employees.push(engineer);
+        } else if (employee_type === 'Intern') {
+            const intern_data = await intern_questions();
+            const intern = new Engineer(intern_data.name, intern_data.id, intern_data.email, intern_data.school);
+            employees.push(intern);
+        }
+    }
+
+    console.log(employees);
+}
+
+async function add_employee() {
+    return inquirer.prompt([questions[ADD_EMPLOYEE_QUESTION]])
+}
+
+async function manager_questions() {
+    return inquirer
+        .prompt([
+            questions[OFFICE_NUMBER_QUESTION],
+            questions[NAME_QUESTION],
+            questions[ID_QUESTION],
+            questions[EMAIL_QUESTION]
+        ])
+}
+
+async function engineer_questions() {
+    return inquirer
+        .prompt([
+            questions[GITHUB_QUESTION],
+            questions[NAME_QUESTION],
+            questions[ID_QUESTION],
+            questions[EMAIL_QUESTION]
+        ])
+}
+
+async function intern_questions() {
+    return inquirer
+        .prompt([
+            questions[SCHOOL_QUESTION],
+            questions[NAME_QUESTION],
+            questions[ID_QUESTION],
+            questions[EMAIL_QUESTION]
+        ])
 }
 
 // Function call to initialize app
 init();
-question(OFFICE_NUMBER_QUESTION);
