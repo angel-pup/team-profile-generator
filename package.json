@@ -23,6 +23,7 @@
   "dependencies": {
     "inquirer": "^8.2.4",
     "jquery": "^3.6.1",
+    "jsdom": "^20.0.3",
     "materialize": "^1.0.0"
   }
 }
