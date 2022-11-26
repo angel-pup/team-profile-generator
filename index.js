@@ -1,14 +1,25 @@
-const inquirer = require('inquirer');
-const fs = require('fs');
-// Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
 
 // Include packages needed for this application
-// Employee Types
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
-const Manager = require('./lib/Manager');
-// HTML Generator
-const Template = require('./src/Template');
+const inquirer = require('inquirer'); // For building promise data from command line inputs
+const fs = require('fs'); // For file reading/writing
+const Engineer = require('./lib/Engineer'); // Employee Type
+const Intern = require('./lib/Intern'); // Employee Type
+const Manager = require('./lib/Manager'); // Employee Type
+const path = require('path'); // For handling file paths
+// Import JSDOM Class for creating a mock DOM, necessary for leveraging jQuery with Node.js
+const { JSDOM } = require( "jsdom" );
+// IO functions return buffers, need to use toString
+// HTML Template. This will be used to create the mock DOM
+const html_template = fs.readFileSync(path.join(__dirname, './src/Template.html')).toString();
+// creating a new jsdom object using JSDOM class, passing in our HTML Template
+const jsdom = new JSDOM(html_template);
+// importing jquery, pointing it to our mock DOM
+const $ = require("jquery")(jsdom.window);
+// reading and storing our card template, transforming buffer to string again
+const card_template = fs.readFileSync(path.join(__dirname, './src/Card_Template.html')).toString();
+// parsing the card template and storing it as nodes object, for further manipulation via jQuery
+const html_member = $('#members');
+const card = $.parseHTML(card_template);
 
 // Constants to make code more readable/slightly less typing later on
 const NAME_QUESTION = 'name-question';
@@ -18,6 +29,19 @@ const OFFICE_NUMBER_QUESTION = 'office-number-question';
 const GITHUB_QUESTION = 'github-question';
 const SCHOOL_QUESTION = 'school-question';
 const ADD_EMPLOYEE_QUESTION = 'add-employee-question';
+
+const ICONS = {
+    "SCHOOL": "<i class=\"fa fa-thin fa-school\"></i>",
+    "ENGINEER": "<p style=\"text-align:center\"><i class=\"fa fa-solid " +
+        "fa-glasses\" style=\"padding-right:10px\"></i>Engineer</p>",
+    "MANAGER": "<p style=\"text-align:center\"><i class=\"fa fa-solid " +
+        "fa-mug-hot\" style=\"padding-right:10px\"></i>Manager</p>",
+    "INTERN": "<p style=\"text-align:center\"><i class=\"fa fa-solid " +
+        "fa-user-graduate\" style=\"padding-right:10px\"></i>Intern</p>",
+    "GITHUB": "<i class=\"fa fa-brands fa-github\"></i>",
+    "OFFICE_NUMBER": "<i class=\"fa fa-solid fa-phone\"></i>"
+}
+
 
 // Dictionary of questions
 const questions = {
@@ -59,9 +83,6 @@ const questions = {
     }
 }
 
-// Function to generate an HTML file
-function writeToFile(fileName, data) {}
-
 /**
  * Asks questions about team members, and generates appropriate HTML
  * @returns {Promise<void>}
@@ -89,6 +110,7 @@ async function init() {
 
     // if employee type is not equal to our stop value, continue asking questions
     while(employee_type !== 'No Thanks.') {
+
         // call add_employee() to check if user would like to add another team member
         let add_moar_employees = await add_employee();
         // store the returned value
@@ -105,8 +127,8 @@ async function init() {
             );
             // store Engineer data object in our employee object array
             employees.push(engineer);
-
         }
+
         // else if employee_type is Intern, ask Intern questions and store object data
         else if (employee_type === 'Intern') {
             const intern_info = await intern_questions();
@@ -118,11 +140,61 @@ async function init() {
             );
             // store Intern data object in our employee object array
             employees.push(intern);
-
         }
+
     }
 
-    console.log(employees); // TODO: create new instance of Template, then pass data/generate HTML
+    html_member.append(card);
+
+    for (let i = 1; i < employees.length; i++) {
+        const card_clone = $('.xl3').eq(0).clone();
+        card_clone.appendTo(html_member);
+    }
+
+    const name = $('.name-template');
+    const id = $('.id-template');
+    const email = $('.email-template');
+    const extra = $('.extra-template');
+
+    for (let i = 0; i < employees.length; i++) {
+
+        name.eq(i).append(`<p style=\"text-align:center; padding-top:15px\">${await employees[i].getName()}</p>`);
+
+        id.eq(i).html(await employees[i].getId());
+        const email_address = await employees[i].getEmail()
+        email.eq(i).attr('href', `mailto: ${email_address}`);
+        email.eq(i).html(email_address);
+
+        switch(await employees[i].getRole()) {
+            case 'Engineer':
+                const username = await employees[i].getGithub()
+                name.eq(i).append(ICONS['ENGINEER']);
+                extra.eq(i).prepend(ICONS['GITHUB']);
+                extra.eq(i).attr('target', '_blank');
+                extra.eq(i).attr('href', `https://github.com/${username}`)
+                extra.eq(i).html(`github.com/${username}`);
+                break;
+            case 'Manager':
+                const office_number = await employees[i].getOfficeNumber();
+                name.eq(i).append(ICONS['MANAGER']);
+                extra.eq(i).prepend(ICONS['OFFICE_NUMBER']);
+                extra.eq(i).html(office_number);
+                break;
+            case 'Intern':
+                name.eq(i).append(ICONS['INTERN']);
+                extra.eq(i).prepend(ICONS['SCHOOL']);
+                extra.eq(i).html(await employees[i].getSchool());
+                break;
+            default:
+                // TODO: handle
+        }
+
+
+    }
+
+    const output = jsdom.serialize();
+    fs.writeFileSync(path.join(__dirname, './dist/output.html'), output);
+
 }
 
 /**
