@@ -13,8 +13,8 @@ describe("Employee", () => {
             // Finally, we test if our exampleOutput matches that of the getName() method
             // found within the Employee class.
             expect(employee.getName()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Employee class getId() method
     describe("getId", () => {
@@ -27,8 +27,8 @@ describe("Employee", () => {
             // Finally, we test if our exampleOutput matches that of the getId() method
             // found within the Employee class.
             expect(employee.getId()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Employee class getEmail() method
     describe("getEmail", () => {
@@ -41,8 +41,8 @@ describe("Employee", () => {
             // Finally, we test if our exampleOutput matches that of the getEmail() method
             // found within the Employee class.
             expect(employee.getEmail()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Employee class getRole() method
     describe("getRole", () => {
@@ -55,6 +55,6 @@ describe("Employee", () => {
             // Finally, we test if our exampleOutput matches that of the getRole() method
             // found within the Employee class.
             expect(employee.getRole()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 });

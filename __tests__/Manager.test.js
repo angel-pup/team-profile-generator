@@ -13,8 +13,8 @@ describe("Manager", () => {
             // Finally, we test if our exampleOutput matches that of the getName() method
             // inherited by the Manager class.
             expect(manager.getName()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Manager class getId() method
     describe("getId", () => {
@@ -27,8 +27,8 @@ describe("Manager", () => {
             // Finally, we test if our exampleOutput matches that of the getId() method
             // inherited by the Manager class.
             expect(manager.getId()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Manager class getEmail() method
     describe("getEmail", () => {
@@ -41,8 +41,8 @@ describe("Manager", () => {
             // Finally, we test if our exampleOutput matches that of the getEmail() method
             // inherited by the Manager class.
             expect(manager.getEmail()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Manager class getRole() method
     describe("getRole", () => {
@@ -55,8 +55,8 @@ describe("Manager", () => {
             // Finally, we test if our exampleOutput matches that of the getRole() method
             // inherited by the Manager class.
             expect(manager.getRole()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Manager class getOfficeNumber() method
     describe("getOfficeNumber", () => {
@@ -69,6 +69,6 @@ describe("Manager", () => {
             // Finally, we test if our exampleOutput matches that of the getOfficeNumber() method
             // inherited by the Manager class.
             expect(manager.getOfficeNumber()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 });

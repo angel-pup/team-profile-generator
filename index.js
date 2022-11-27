@@ -161,28 +161,27 @@ async function init() {
         name.eq(i).append(`<p style=\"text-align:center; padding-top:15px\">${await employees[i].getName()}</p>`);
 
         id.eq(i).html(await employees[i].getId());
-        const email_address = await employees[i].getEmail()
+        const email_address = await employees[i].getEmail();
         email.eq(i).attr('href', `mailto: ${email_address}`);
         email.eq(i).html(email_address);
 
         switch(await employees[i].getRole()) {
             case 'Engineer':
-                const username = await employees[i].getGithub()
+                const username = await employees[i].getGithub();
                 name.eq(i).append(ICONS['ENGINEER']);
-                extra.eq(i).prepend(ICONS['GITHUB']);
-                extra.eq(i).attr('target', '_blank');
-                extra.eq(i).attr('href', `https://github.com/${username}`)
-                extra.eq(i).html(`github.com/${username}`);
+                extra.eq(i).parent().prepend(ICONS['GITHUB']);
+                extra.eq(i).html(`<a class="title" href="https://github.com/${username}"` +
+                    `target="_blank">github.com/${username}</a>`);
                 break;
             case 'Manager':
                 const office_number = await employees[i].getOfficeNumber();
                 name.eq(i).append(ICONS['MANAGER']);
-                extra.eq(i).prepend(ICONS['OFFICE_NUMBER']);
+                extra.eq(i).parent().prepend(ICONS['OFFICE_NUMBER']);
                 extra.eq(i).html(office_number);
                 break;
             case 'Intern':
                 name.eq(i).append(ICONS['INTERN']);
-                extra.eq(i).prepend(ICONS['SCHOOL']);
+                extra.eq(i).parent().prepend(ICONS['SCHOOL']);
                 extra.eq(i).html(await employees[i].getSchool());
                 break;
             default:
@@ -194,7 +193,7 @@ async function init() {
 
     const output = jsdom.serialize();
     fs.writeFileSync(path.join(__dirname, './dist/output.html'), output);
-
+    console.log('HTML Generated :)');
 }
 
 /**
@@ -202,7 +201,7 @@ async function init() {
  * @returns {Promise<*>}
  */
 async function add_employee() {
-    return inquirer.prompt([questions[ADD_EMPLOYEE_QUESTION]])
+    return inquirer.prompt([questions[ADD_EMPLOYEE_QUESTION]]);
 }
 
 /**
@@ -216,7 +215,7 @@ async function manager_questions() {
             questions[NAME_QUESTION],
             questions[ID_QUESTION],
             questions[EMAIL_QUESTION]
-        ])
+        ]);
 }
 
 /**
@@ -230,7 +229,7 @@ async function engineer_questions() {
             questions[NAME_QUESTION],
             questions[ID_QUESTION],
             questions[EMAIL_QUESTION]
-        ])
+        ]);
 }
 
 /**
@@ -244,7 +243,7 @@ async function intern_questions() {
             questions[NAME_QUESTION],
             questions[ID_QUESTION],
             questions[EMAIL_QUESTION]
-        ])
+        ]);
 }
 
 // Function call to initialize app
