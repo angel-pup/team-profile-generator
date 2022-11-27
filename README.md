@@ -43,7 +43,7 @@ Vess Stewart - [GitHub](https://github.com/SpencerRSMS)
 
 ## Example
 #### Utilizing CLI
-![image](./images/example_run.webm)
+![image](./images/example_run.gif)
 
 #### Example Output
 ![image](./images/example_output.png)
