@@ -13,8 +13,8 @@ describe("Engineer", () => {
             // Finally, we test if our exampleOutput matches that of the getName() method
             // inherited by the Engineer class.
             expect(engineer.getName()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Engineer class getId() method
     describe("getId", () => {
@@ -27,8 +27,8 @@ describe("Engineer", () => {
             // Finally, we test if our exampleOutput matches that of the getId() method
             // inherited by the Engineer class.
             expect(engineer.getId()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Engineer class getEmail() method
     describe("getEmail", () => {
@@ -41,8 +41,8 @@ describe("Engineer", () => {
             // Finally, we test if our exampleOutput matches that of the getEmail() method
             // inherited by the Engineer class.
             expect(engineer.getEmail()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Engineer class getRole() method
     describe("getRole", () => {
@@ -55,8 +55,8 @@ describe("Engineer", () => {
             // Finally, we test if our exampleOutput matches that of the getRole() method
             // inherited by the Engineer class.
             expect(engineer.getRole()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Engineer class getGithub() method
     describe("getGithub", () => {
@@ -69,6 +69,6 @@ describe("Engineer", () => {
             // Finally, we test if our exampleOutput matches that of the getGithub() method
             // inherited by the Engineer class.
             expect(engineer.getGithub()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 });

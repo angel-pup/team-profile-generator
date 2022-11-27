@@ -13,8 +13,8 @@ describe("Intern", () => {
             // Finally, we test if our exampleOutput matches that of the getName() method
             // inherited by the Intern class.
             expect(intern.getName()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Intern class getId() method
     describe("getId", () => {
@@ -27,8 +27,8 @@ describe("Intern", () => {
             // Finally, we test if our exampleOutput matches that of the getId() method
             // inherited by the Intern class.
             expect(intern.getId()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Intern class getEmail() method
     describe("getEmail", () => {
@@ -41,8 +41,8 @@ describe("Intern", () => {
             // Finally, we test if our exampleOutput matches that of the getEmail() method
             // inherited by the Intern class.
             expect(intern.getEmail()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Intern class getRole() method
     describe("getRole", () => {
@@ -55,8 +55,8 @@ describe("Intern", () => {
             // Finally, we test if our exampleOutput matches that of the getRole() method
             // inherited by the Intern class.
             expect(intern.getRole()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 
     // test Intern class getSchool() method
     describe("getSchool", () => {
@@ -69,6 +69,6 @@ describe("Intern", () => {
             // Finally, we test if our exampleOutput matches that of the getSchool() method
             // inherited by the Intern class.
             expect(intern.getSchool()).toEqual(exampleOutput);
-        })
-    })
+        });
+    });
 });
