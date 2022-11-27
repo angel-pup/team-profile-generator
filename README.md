@@ -4,10 +4,11 @@
 ## Table of Contents
 
 - [Description](#description)
+- [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
-- [Code Example](#Example)
-- [Live Site](#Links)
+- [Example](#example)
+- [Repo](#links)
 
 ## Description
 A Node.js project that prompts the user for information regarding a team of people
@@ -17,13 +18,18 @@ and Font Awesome icons.
 
 ## Installation
 1 - Ensure Node.js has been properly installed
+
 2 - Download or clone the project locally
+
 3 - Navigate to folder via CLI
+
 4 - Run 'npm i' to install dependencies
 
 ## Usage
 1 - Navigate to folder via CLI
+
 2 - Run 'npm start' to run the program
+
 3 - Follow prompts within CLI
 
 ## Credits
@@ -49,5 +55,4 @@ Vess Stewart - [GitHub](https://github.com/SpencerRSMS)
 ![image](./images/example_output.png)
 
 ## Links
-#### [GitHub repository](https://github.com/SpencerRSMS/Coding-Quiz).
-#### [Live-Site](https://spencerrsms.github.io/movie-vibes)
+#### [GitHub repository](https://github.com/SpencerRSMS/team-profile-generator)
